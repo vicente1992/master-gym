@@ -1,0 +1,177 @@
+<div class="container mt-5">
+  <form [formGroup]="formCliente">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="">Nombre</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Ingresa tu nombre"
+            formControlName="nombre"
+          />
+          <div
+            *ngIf="
+              formCliente.controls['nombre'].invalid &&
+              (formCliente.controls['nombre'].dirty ||
+                formCliente.controls['nombre'].touched)
+            "
+            class="alert alert-danger"
+            role="alert"
+          >
+            <span *ngIf="formCliente.controls['nombre'].errors.required"
+              >El nombre es requerido</span
+            >
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="">Apellido</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Ingresa tus apellidos"
+            formControlName="apellido"
+          />
+          <div
+            *ngIf="
+              formCliente.controls['apellido'].invalid &&
+              (formCliente.controls['apellido'].dirty ||
+                formCliente.controls['apellido'].touched)
+            "
+            class="alert alert-danger"
+            role="alert"
+          >
+            <span *ngIf="formCliente.controls['apellido'].errors.required"
+              >El apellido es requerido</span
+            >
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="">Correo</label>
+          <input
+            type="email"
+            class="form-control"
+            placeholder="Ingresa tu correo electronico"
+            formControlName="email"
+          />
+          <div
+            *ngIf="
+              formCliente.controls['email'].invalid &&
+              (formCliente.controls['email'].dirty ||
+                formCliente.controls['email'].touched)
+            "
+            class="alert alert-danger"
+            role="alert"
+          >
+            <span *ngIf="formCliente.controls['email'].errors.required"
+              >El email es requerido</span
+            >
+            <span *ngIf="formCliente.controls['email'].errors.email"
+              >Ingresa un email valido</span
+            >
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="">Cedula</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Ingresa tu cedula"
+            formControlName="cedula"
+          />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="">Fecha de nacimiento</label>
+          <input
+            type="date"
+            class="form-control"
+            placeholder="Ingresa tu fecha de nacimiento"
+            formControlName="fechaNacimiento"
+          />
+          <div
+            *ngIf="
+              formCliente.controls['fechaNacimiento'].invalid &&
+              (formCliente.controls['fechaNacimiento'].dirty ||
+                formCliente.controls['fechaNacimiento'].touched)
+            "
+            class="alert alert-danger"
+            role="alert"
+          >
+            <span
+              *ngIf="formCliente.controls['fechaNacimiento'].errors.required"
+              >La fecha de nacimiento es requerida</span
+            >
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="">Télefono</label>
+          <input
+            type="tel"
+            class="form-control"
+            placeholder="Ingresa tu número de telefono"
+            formControlName="telefono"
+          />
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="">Imagen</label>
+          <input
+            type="file"
+            (change)="subirImagen($event)"
+            class="form-control-file"
+            placeholder="Ingresa tu imagen"
+            formControlName="ImgUrl"
+          />
+          <div
+            *ngIf="
+              formCliente.controls['ImgUrl'].invalid &&
+              formCliente.controls['ImgUrl'].dirty
+            "
+            class="alert alert-danger"
+            role="alert"
+          >
+            <span *ngIf="formCliente.controls['ImgUrl'].errors.required"
+              >La imagen es requerida</span
+            >
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <progressbar
+          [value]="porcentajeSubida"
+          type="danger"
+          [striped]="true"
+          >{{ porcentajeSubida }}</progressbar
+        >
+      </div>
+      <br />
+
+      <button
+        class="btn btn-primary"
+        *ngIf="!esEditable"
+        [disabled]="!formCliente.valid"
+        (click)="agregarCliente()"
+      >
+        Agregar
+      </button>
+      <button
+        class="btn btn-primary"
+        *ngIf="esEditable"
+        (click)="editarCliente()"
+      >
+        Editar
+      </button>
+    </div>
+  </form>
+</div>
